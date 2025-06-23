@@ -70,3 +70,11 @@ document.getElementById('start-button').addEventListener('click', function () {
         }
     }, 1000); // 1000 ms = 1 second
 });
+
+// If 'pause' button is clicked, halt timerInterval
+document.getElementById('pause-button').addEventListener('click', function () {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+});
