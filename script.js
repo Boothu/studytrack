@@ -27,10 +27,46 @@ document.querySelector('.task-lists').addEventListener('click', function (e) {
         delBtn.textContent = 'Delete';
         li.appendChild(delBtn);
     }
-    
-    // If delete task button clicked, remove task
+
+    // If 'delete' button is clicked, remove task
     if (e.target.className === 'delete-task') {
         const li = e.target.closest('li');
         if (li) li.remove();
     }
+});
+
+// Pomodoro timer Logic
+let timerInterval;
+let timeLeft = 25 * 60; // 25 minutes in seconds
+
+// Split total time (which is in seconds) into minutes and seconds and update timer display
+function updateTimerDisplay() {
+    var minutes = Math.floor(timeLeft / 60);
+    var seconds = timeLeft % 60;
+    if (seconds < 10) {
+        seconds = "0" + seconds;
+    }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    document.getElementById('timer-display').textContent = minutes + ":" + seconds;
+}
+
+// If 'start' button is clicked
+document.getElementById('start-button').addEventListener('click', function () {
+    // If there is already a timer running, do nothing
+    if (timerInterval) return;
+    // Start interval which runs every second
+    timerInterval = setInterval(function () {
+        // Decrease time as long as there is time left
+        if (timeLeft > 0) {
+            timeLeft--;
+            updateTimerDisplay();
+        }
+        // Otherwise, stop the timer and reset timerInterval
+        else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+    }, 1000); // 1000 ms = 1 second
 });
