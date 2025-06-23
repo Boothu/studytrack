@@ -78,3 +78,13 @@ document.getElementById('pause-button').addEventListener('click', function () {
         timerInterval = null;
     }
 });
+
+// If 'reset' button is clicked reset timeLeft to 25 minutes and halt timer
+document.getElementById('reset-button').addEventListener('click', function () {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+    timeLeft = 25 * 60;
+    updateTimerDisplay();
+});
