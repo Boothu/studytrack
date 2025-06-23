@@ -38,6 +38,8 @@ document.querySelector('.task-lists').addEventListener('click', function (e) {
 // Pomodoro timer Logic
 let timerInterval;
 let timeLeft = 25 * 60; // 25 minutes in seconds
+let isFocusSession = true; // Tracks whether current session is for focus or for break
+let pomodoroCount = 0;
 
 // Split total time (which is in seconds) into minutes and seconds and update timer display
 function updateTimerDisplay() {
@@ -67,6 +69,23 @@ document.getElementById('start-button').addEventListener('click', function () {
         else {
             clearInterval(timerInterval);
             timerInterval = null;
+
+            // If a focus session has just ended, begin a break
+            if (isFocusSession) {
+                pomodoroCount++;
+                isFocusSession = false;
+                // If number of pomodoros completed is divisible by 4, start a long break
+                // Otherwise, start a short break
+                timeLeft = (pomodoroCount % 4 === 0) ? 25 * 60 : 5 * 60;
+                alert((pomodoroCount % 4 === 0) ? "Time for a long break!" : "Time for a short break!");
+            }
+            // If a break session has just ended, start a focus session
+            else {
+                isFocusSession = true;
+                timeLeft = 25 * 60;
+                alert("Back to work!");
+            }
+            updateTimerDisplay();
         }
     }, 1000); // 1000 ms = 1 second
 });
