@@ -98,12 +98,30 @@ document.getElementById('pause-button').addEventListener('click', function () {
     }
 });
 
-// If 'reset' button is clicked reset timeLeft to 25 minutes and halt timer
+// If 'reset' button is clicked reset everything to default
 document.getElementById('reset-button').addEventListener('click', function () {
-    if (timerInterval) {
-        clearInterval(timerInterval);
-        timerInterval = null;
-    }
+    clearInterval(timerInterval);
+    timerInterval = null;
+    isFocusSession = true;
+    pomodoroCount = 0;
+    timeLeft = 25 * 60;
+    updateTimerDisplay();
+});
+
+// If 'skip5' button is clicked
+document.getElementById('skip5-button').addEventListener('click', function () {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    isFocusSession = false;
+    timeLeft = 5 * 60;
+    updateTimerDisplay();
+});
+
+// If 'skip25' button is clicked
+document.getElementById('skip25-button').addEventListener('click', function () {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    isFocusSession = false;
     timeLeft = 25 * 60;
     updateTimerDisplay();
 });
