@@ -58,12 +58,22 @@ function updateTimerDisplay() {
 document.getElementById('start-button').addEventListener('click', function () {
     // If there is already a timer running, do nothing
     if (timerInterval) return;
+    // Calculate the session duration (25 minutes for focus or 5/25 minutes for breaks) and store the current timeLeft
+    const sessionDuration = isFocusSession ? 25 * 60 : (pomodoroCount % 4 === 0 ? 25 * 60 : 5 * 60);
+    const startTime = timeLeft;
     // Start interval which runs every second
     timerInterval = setInterval(function () {
         // Decrease time as long as there is time left
         if (timeLeft > 0) {
             timeLeft--;
             updateTimerDisplay();
+            // If this is a focus session, track elapsed minutes and seconds, then update the progress bar
+            if (isFocusSession) {
+                const elapsedSeconds = startTime - timeLeft;
+                const elapsedMinutes = elapsedSeconds / 60;
+                minutesCompleted = Math.min(elapsedMinutes, dailyGoal);
+                updateProgress();
+            }
         }
         // Otherwise, stop the timer and reset timerInterval
         else {
@@ -125,3 +135,31 @@ document.getElementById('skip25-button').addEventListener('click', function () {
     timeLeft = 25 * 60;
     updateTimerDisplay();
 });
+
+let dailyGoal = 0;
+let minutesCompleted = 0;
+
+const goalInput = document.getElementById("goal-input");
+const progressText = document.getElementById("progress-text");
+const progressBar = document.getElementById("progress-bar");
+
+// If 'set goal' button is clicked, set the daily goal and reset progress
+document.getElementById('set-goal').addEventListener('click', function () {
+    dailyGoal = parseInt(goalInput.value);
+    minutesCompleted = 0;
+    updateProgress();
+});
+
+// Calculate and update the progress bar based on the daily goal and completed minutes
+function updateProgress() {
+    let percent = 0;
+    if (dailyGoal > 0) {
+        percent = (minutesCompleted / dailyGoal) * 100;
+        if (percent > 100) {
+            percent = 100;
+        }
+    }
+    const displayMinutes = Math.floor(minutesCompleted);
+    progressText.textContent = `${displayMinutes} / ${dailyGoal} mins`;
+    progressBar.style.width = `${percent}%`;
+}
