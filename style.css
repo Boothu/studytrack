@@ -1,12 +1,108 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #f0f4f8;
+    color: #333;
+    padding: 20px;
+}
+
+header,
+section,
+footer {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+section {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#timer-display {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #3b3b98;
+    margin-bottom: 15px;
+}
+
+button,
+#set-goal {
+    padding: 8px 14px;
+    background: #3b3b98;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover,
+#set-goal:hover {
+    background: #2f2f8b;
+}
+
+.task-lists {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.task-column {
+    background: #f9f9ff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    width: 200px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-list li {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 6px;
+}
+
+#goal-input {
+    padding: 6px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    width: 80px;
+    text-align: center;
+}
+
 #progress-bar-container {
     width: 100%;
     height: 20px;
-    background-color: #ddd;
+    background: #ddd;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
 #progress-bar {
     height: 100%;
     width: 0%;
-    background-color: #6a0dad;
+    background: #3b3b98;
     transition: width 0.3s ease;
+}
+
+footer {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 20px;
 }
