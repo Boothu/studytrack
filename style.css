@@ -23,10 +23,27 @@ section {
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-size: 2.6rem;
+    margin-bottom: 28px;
+}
+
+#pomodoro h2 {
+    margin-bottom: 5px;
+}
+
+h2 {
+    font-size: 1.7rem;
+    margin-bottom: 12px;
 }
 
 #timer-display {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
     color: #3b3b98;
     margin-bottom: 15px;
@@ -48,6 +65,11 @@ button:hover,
     background: #2f2f8b;
 }
 
+#tasks h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
 .task-lists {
     display: flex;
     gap: 15px;
@@ -59,10 +81,14 @@ button:hover,
     border: 1px solid #ddd;
     border-radius: 6px;
     padding: 10px;
-    width: 200px;
-    min-height: 200px;
+    width: 220px;
+    min-height: 220px;
     display: flex;
     flex-direction: column;
+}
+
+.add-task-button {
+    margin-bottom: 12px;
 }
 
 .task-list {
@@ -74,8 +100,22 @@ button:hover,
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 8px;
+    padding: 4px 6px;
     margin-bottom: 6px;
+}
+
+.delete-task {
+    background: transparent;
+    color: #ff4d4d;
+    border: none;
+    font-size: 1.1em;
+    margin-left: 1px;
+    cursor: pointer;
+}
+
+.delete-task:hover {
+    background: transparent;
+    color: #f70404;
 }
 
 #goal-input {
@@ -84,6 +124,7 @@ button:hover,
     border-radius: 4px;
     width: 80px;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 #progress-bar-container {
@@ -92,6 +133,7 @@ button:hover,
     background: #ddd;
     border-radius: 6px;
     overflow: hidden;
+    margin-top: 10px;
 }
 
 #progress-bar {
@@ -105,4 +147,15 @@ footer {
     font-size: 0.9rem;
     color: #555;
     margin-top: 20px;
+}
+
+@media (max-width: 700px) {
+    .task-lists {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .task-column {
+        width: 90%;
+    }
 }

@@ -24,7 +24,7 @@ document.querySelector('.task-lists').addEventListener('click', function (e) {
         // Add a delete button
         const delBtn = document.createElement('button');
         delBtn.className = 'delete-task';
-        delBtn.textContent = 'Delete';
+        delBtn.textContent = ' ✕ ';
         li.appendChild(delBtn);
     }
 
