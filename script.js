@@ -35,6 +35,18 @@ document.querySelector('.task-lists').addEventListener('click', function (e) {
     }
 });
 
+document.querySelector('.finished-button').addEventListener('click', function (e) {
+    // Hide finished tasks column if it is currently visible, or show it if it is hidden
+    const finishedCol = document.getElementById('finished');
+    if (finishedCol.style.display === 'none') {
+        finishedCol.style.display = '';
+        e.target.textContent = 'Hide Finished';
+    } else {
+        finishedCol.style.display = 'none';
+        e.target.textContent = 'Show Finished';
+    }
+});
+
 // Pomodoro timer Logic
 let timerInterval;
 let timeLeft = 25 * 60; // 25 minutes in seconds

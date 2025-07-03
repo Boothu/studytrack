@@ -70,6 +70,10 @@ button:hover,
     margin-bottom: 10px;
 }
 
+.finished-button {
+    margin-bottom: 12px;
+}
+
 .task-lists {
     display: flex;
     gap: 15px;

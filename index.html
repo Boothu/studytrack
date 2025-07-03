@@ -29,6 +29,7 @@
 
     <section id="tasks">
         <h2>Task Manager</h2>
+        <button class="finished-button">Show Finished</button>
         <div class="task-lists">
             <div class="task-column" id="high-priority">
                 <h3>High Priority</h3>
@@ -48,6 +49,12 @@
                 <h3>Low Priority</h3>
                 <button class="add-task-button">+ Add Task</button>
                 <ul class="task-list" id="low-tasks">
+                </ul>
+            </div>
+
+            <div class="task-column" id="finished" style="display: none;">
+                <h3>Finished</h3>
+                <ul class="task-list" id="finished-tasks">
                 </ul>
             </div>
         </div>
