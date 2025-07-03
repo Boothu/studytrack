@@ -110,7 +110,7 @@ button:hover,
 
 .delete-task {
     background: transparent;
-    color: #ff4d4d;
+    color: #57ee46;
     border: none;
     font-size: 1.1em;
     margin-left: 1px;
@@ -119,7 +119,7 @@ button:hover,
 
 .delete-task:hover {
     background: transparent;
-    color: #f70404;
+    color: #3fd735;
 }
 
 #goal-input {

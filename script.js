@@ -24,14 +24,26 @@ document.querySelector('.task-lists').addEventListener('click', function (e) {
         // Add a delete button
         const delBtn = document.createElement('button');
         delBtn.className = 'delete-task';
-        delBtn.textContent = ' ✕ ';
+        delBtn.textContent = ' ✓ ';
         li.appendChild(delBtn);
     }
 
-    // If 'delete' button is clicked, remove task
+    // ✕
+
+    // If 'delete' button is clicked, move the task to the finished column
     if (e.target.className === 'delete-task') {
         const li = e.target.closest('li');
-        if (li) li.remove();
+        if (li) {
+            // Create a new list item for the finished tasks
+            const finishedLi = document.createElement('li');
+            // Remove the delete button text
+            finishedLi.textContent = li.textContent.replace(' ✓ ', '').trim(); 
+            // Add the finished task to the finished tasks list
+            const finishedTasks = document.getElementById('finished-tasks');
+            finishedTasks.appendChild(finishedLi);
+            // Remove the original task from its column
+            li.remove();
+        }
     }
 });
 
