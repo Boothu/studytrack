@@ -21,23 +21,37 @@ document.querySelector('.task-lists').addEventListener('click', function (e) {
         const taskList = document.getElementById(`${priority}-tasks`);
         taskList.appendChild(li);
 
-        // Add a delete button
+        // Add a finished button
         const delBtn = document.createElement('button');
-        delBtn.className = 'delete-task';
-        delBtn.textContent = ' ✓ ';
+        delBtn.className = 'finished-task';
+        delBtn.textContent = '✓';
         li.appendChild(delBtn);
     }
 
-    // ✕
+    // Add a delete button next to the tasks which are in the finished column - if you press it, it will delete the task
+    if (
+        e.target.className === 'delete-task' &&
+        e.target.closest('.task-column')?.id ==='finished'
+    ) {
+        const li = e.target.closest('li');
+        if (li) li.remove();
+    }
 
-    // If 'delete' button is clicked, move the task to the finished column
-    if (e.target.className === 'delete-task') {
+    // If 'finished' button is clicked, move the task to the finished column
+    if (e.target.className === 'finished-task') {
         const li = e.target.closest('li');
         if (li) {
             // Create a new list item for the finished tasks
             const finishedLi = document.createElement('li');
-            // Remove the delete button text
-            finishedLi.textContent = li.textContent.replace(' ✓ ', '').trim(); 
+            // Remove the finished button text
+            finishedLi.textContent = li.textContent.replace('✓', '').trim();
+
+            // Add a delete button
+            const delBtn = document.createElement('button');
+            delBtn.className = 'delete-task';
+            delBtn.textContent = '✕';
+            finishedLi.appendChild(delBtn);
+
             // Add the finished task to the finished tasks list
             const finishedTasks = document.getElementById('finished-tasks');
             finishedTasks.appendChild(finishedLi);

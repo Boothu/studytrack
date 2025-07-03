@@ -108,7 +108,7 @@ button:hover,
     margin-bottom: 6px;
 }
 
-.delete-task {
+.finished-task {
     background: transparent;
     color: #57ee46;
     border: none;
@@ -117,9 +117,23 @@ button:hover,
     cursor: pointer;
 }
 
-.delete-task:hover {
+.finished-task:hover {
     background: transparent;
     color: #3fd735;
+}
+
+.delete-task {
+    background: transparent;
+    color: #f82323;
+    border: none;
+    font-size: 1.1em;
+    margin-left: 1px;
+    cursor: pointer;
+}
+
+.delete-task:hover {
+    background: transparent;
+    color: #d12020;
 }
 
 #goal-input {
