@@ -18,6 +18,16 @@ footer {
     margin-bottom: 20px;
 }
 
+header h1 {
+    font-size: 3.1rem;
+    margin-bottom: 10px;
+}
+
+header button {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+}
+
 section {
     background: #fff;
     border-radius: 8px;
@@ -167,6 +177,51 @@ footer {
     margin-top: 20px;
 }
 
+/* Dark mode styling */
+body.dark {
+    background: #23272f;
+    color: #e3e6ee;
+}
+
+body.dark #timer-display {
+    color: #7c83fd;
+}
+
+body.dark section {
+    background: #2d3142;
+    color: #e3e6ee;
+}
+
+body.dark .task-column {
+    background: #35394a;
+    border-color: #4f5368;
+}
+
+body.dark .task-list li {
+    background: #3d4157;
+    border-color: #5a5e76;
+}
+
+body.dark button,
+body.dark #set-goal {
+    background: #4950a3;
+    color: #fff;
+}
+
+body.dark button:hover,
+body.dark #set-goal:hover {
+    background: #3b3f7a;
+}
+
+body.dark #progress-bar-container {
+    background: #444a6d;
+}
+
+body.dark #progress-bar {
+    background: #7c83fd;
+}
+
+/* Mobile display */
 @media (max-width: 700px) {
     .task-lists {
         flex-direction: column;
