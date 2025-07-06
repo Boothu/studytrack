@@ -1,3 +1,4 @@
+// HEADER BUTTONS
 // If 'no distractions mode' button is clicked, hide everything but the pomodoro timer and start/pause
 document.querySelector('.no-dist-button').addEventListener('click', function () {
     const tasks = document.getElementById('tasks');
@@ -36,81 +37,10 @@ document.querySelector('.no-dist-button').addEventListener('click', function () 
     }
 });
 
-document.querySelector('.task-lists').addEventListener('click', function (e) {
-    // If 'add task' button is clicked
-    if (e.target.className === 'add-task-button') {
-        // Find which task column the button is in
-        const column = e.target.closest('.task-column');
-        let priority = '';
-        if (column.id === 'high-priority') priority = 'high';
-        else if (column.id === 'medium-priority') priority = 'medium';
-        else if (column.id === 'low-priority') priority = 'low';
-        else return;
 
-        // Prompt for task text
-        const taskText = prompt(`Enter a new ${priority} priority task:`);
-        if (!taskText) return;
 
-        // Create new task
-        const li = document.createElement('li');
-        li.textContent = taskText.trim();
 
-        // Add to the correct list
-        const taskList = document.getElementById(`${priority}-tasks`);
-        taskList.appendChild(li);
-
-        // Add a finished button
-        const delBtn = document.createElement('button');
-        delBtn.className = 'finished-task';
-        delBtn.textContent = '✓';
-        li.appendChild(delBtn);
-    }
-
-    // Add a delete button next to the tasks which are in the finished column - if you press it, it will delete the task
-    if (
-        e.target.className === 'delete-task' &&
-        e.target.closest('.task-column')?.id ==='finished'
-    ) {
-        const li = e.target.closest('li');
-        if (li) li.remove();
-    }
-
-    // If 'finished' button is clicked, move the task to the finished column
-    if (e.target.className === 'finished-task') {
-        const li = e.target.closest('li');
-        if (li) {
-            // Create a new list item for the finished tasks
-            const finishedLi = document.createElement('li');
-            // Remove the finished button text
-            finishedLi.textContent = li.textContent.replace('✓', '').trim();
-
-            // Add a delete button
-            const delBtn = document.createElement('button');
-            delBtn.className = 'delete-task';
-            delBtn.textContent = '✕';
-            finishedLi.appendChild(delBtn);
-
-            // Add the finished task to the finished tasks list
-            const finishedTasks = document.getElementById('finished-tasks');
-            finishedTasks.appendChild(finishedLi);
-            // Remove the original task from its column
-            li.remove();
-        }
-    }
-});
-
-document.querySelector('.finished-button').addEventListener('click', function (e) {
-    // Hide finished tasks column if it is currently visible, or show it if it is hidden
-    const finishedCol = document.getElementById('finished');
-    if (finishedCol.style.display === 'none') {
-        finishedCol.style.display = '';
-        e.target.textContent = 'Hide Finished';
-    } else {
-        finishedCol.style.display = 'none';
-        e.target.textContent = 'Show Finished';
-    }
-});
-
+// POMODORO TIMER
 // Pomodoro timer Logic
 let timerInterval;
 let timeLeft = 25 * 60; // 25 minutes in seconds
@@ -212,6 +142,89 @@ document.getElementById('skip25-button').addEventListener('click', function () {
     updateTimerDisplay();
 });
 
+
+
+
+// TASK MANAGER
+document.querySelector('.task-lists').addEventListener('click', function (e) {
+    // If 'add task' button is clicked
+    if (e.target.className === 'add-task-button') {
+        // Find which task column the button is in
+        const column = e.target.closest('.task-column');
+        let priority = '';
+        if (column.id === 'high-priority') priority = 'high';
+        else if (column.id === 'medium-priority') priority = 'medium';
+        else if (column.id === 'low-priority') priority = 'low';
+        else return;
+
+        // Prompt for task text
+        const taskText = prompt(`Enter a new ${priority} priority task:`);
+        if (!taskText) return;
+
+        // Create new task
+        const li = document.createElement('li');
+        li.textContent = taskText.trim();
+
+        // Add to the correct list
+        const taskList = document.getElementById(`${priority}-tasks`);
+        taskList.appendChild(li);
+
+        // Add a finished button
+        const delBtn = document.createElement('button');
+        delBtn.className = 'finished-task';
+        delBtn.textContent = '✓';
+        li.appendChild(delBtn);
+    }
+
+    // Add a delete button next to the tasks which are in the finished column - if you press it, it will delete the task
+    if (
+        e.target.className === 'delete-task' &&
+        e.target.closest('.task-column')?.id === 'finished'
+    ) {
+        const li = e.target.closest('li');
+        if (li) li.remove();
+    }
+
+    // If 'finished' button is clicked, move the task to the finished column
+    if (e.target.className === 'finished-task') {
+        const li = e.target.closest('li');
+        if (li) {
+            // Create a new list item for the finished tasks
+            const finishedLi = document.createElement('li');
+            // Remove the finished button text
+            finishedLi.textContent = li.textContent.replace('✓', '').trim();
+
+            // Add a delete button
+            const delBtn = document.createElement('button');
+            delBtn.className = 'delete-task';
+            delBtn.textContent = '✕';
+            finishedLi.appendChild(delBtn);
+
+            // Add the finished task to the finished tasks list
+            const finishedTasks = document.getElementById('finished-tasks');
+            finishedTasks.appendChild(finishedLi);
+            // Remove the original task from its column
+            li.remove();
+        }
+    }
+});
+
+document.querySelector('.finished-button').addEventListener('click', function (e) {
+    // Hide finished tasks column if it is currently visible, or show it if it is hidden
+    const finishedCol = document.getElementById('finished');
+    if (finishedCol.style.display === 'none') {
+        finishedCol.style.display = '';
+        e.target.textContent = 'Hide Finished';
+    } else {
+        finishedCol.style.display = 'none';
+        e.target.textContent = 'Show Finished';
+    }
+});
+
+
+
+
+// DAILY GOAL
 let dailyGoal = 0;
 let minutesCompleted = 0;
 
