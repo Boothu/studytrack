@@ -231,4 +231,36 @@ body.dark #progress-bar {
     .task-column {
         width: 90%;
     }
+
+    .pomodoro-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 0;
+    }
+
+    .pomodoro-controls button {
+        flex: 1 1 45%;
+        min-width: 120px;
+        margin-bottom: 6px;
+        font-size: 1em;
+    }
+
+    #daily-goal>div {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+
+    #daily-goal label,
+    #goal-input,
+    #set-goal {
+        width: 70%;
+        align-self: center;
+    }
+
+    #progress-text {
+        margin-bottom: 8px;
+        display: block;
+    }
 }
