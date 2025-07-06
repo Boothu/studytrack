@@ -1,3 +1,41 @@
+// If 'no distractions mode' button is clicked, hide everything but the pomodoro timer and start/pause
+document.querySelector('.no-dist-button').addEventListener('click', function () {
+    const tasks = document.getElementById('tasks');
+    const goal = document.getElementById('daily-goal');
+    const controls = document.querySelector('.pomodoro-controls');
+    const inNoDistMode = document.body.classList.contains('no-dist');
+
+    if (!inNoDistMode) {
+        // Enter no distractions mode
+        tasks.style.display = 'none';
+        goal.style.display = 'none';
+
+        // Hide all buttons except start and pause
+        const buttons = controls.querySelectorAll('button');
+        buttons.forEach(btn => {
+            if (btn.id !== 'start-button' && btn.id !== 'pause-button') {
+                btn.style.display = 'none';
+            }
+        });
+
+        document.body.classList.add('no-dist');
+        this.textContent = 'Exit No Distractions Mode';
+    } else {
+        // Exit no distractions mode
+        tasks.style.display = '';
+        goal.style.display = '';
+
+        // Show all buttons
+        const buttons = controls.querySelectorAll('button');
+        buttons.forEach(btn => {
+            btn.style.display = '';
+        });
+
+        document.body.classList.remove('no-dist');
+        this.textContent = 'Toggle No Distractions Mode';
+    }
+});
+
 document.querySelector('.task-lists').addEventListener('click', function (e) {
     // If 'add task' button is clicked
     if (e.target.className === 'add-task-button') {
