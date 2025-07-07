@@ -234,9 +234,11 @@ const progressBar = document.getElementById("progress-bar");
 
 // If 'set goal' button is clicked, set the daily goal and reset progress
 document.getElementById('set-goal').addEventListener('click', function () {
-    dailyGoal = parseInt(goalInput.value);
-    minutesCompleted = 0;
-    updateProgress();
+    if (goalInput.value > 0) {
+        dailyGoal = parseInt(goalInput.value);
+        minutesCompleted = 0;
+        updateProgress();
+    }
 });
 
 // Calculate and update the progress bar based on the daily goal and completed minutes
