@@ -145,37 +145,47 @@ document.getElementById('skip25-button').addEventListener('click', function () {
 
 
 
+// ADD TASK MODAL
+let currentPriority = "";
+
+// When 'add task' button is clicked, show the modal and set the current priority based on the column
+document.querySelectorAll('.add-task-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        currentPriority = btn.closest('.task-column').id.replace('-priority', '');
+        document.getElementById('add-task-modal').style.display = 'flex';
+        document.getElementById('task-input').value = "";
+        document.getElementById('task-input').focus();
+    });
+});
+
+// If 'cancel' button is clicked, hide the modal and clear input field
+document.getElementById('add-task-cancel').addEventListener('click', () => {
+    document.getElementById('add-task-modal').style.display = 'none';
+    document.getElementById('task-input').value = "";
+});
+
+// If 'confirm' button is clicked, add new task to current priority column
+document.getElementById('add-task-confirm').addEventListener('click', () => {
+    const taskText = document.getElementById('task-input').value.trim();
+    if (!taskText) return;
+
+    const li = document.createElement('li');
+    li.textContent = taskText;
+
+    const finishBtn = document.createElement('button');
+    finishBtn.className = 'finished-task';
+    finishBtn.textContent = '✓';
+    li.appendChild(finishBtn);
+
+    document.getElementById(`${currentPriority}-tasks`).appendChild(li);
+    document.getElementById('add-task-modal').style.display = 'none';
+});
+
+
+
+
 // TASK MANAGER
 document.querySelector('.task-lists').addEventListener('click', function (e) {
-    // If 'add task' button is clicked
-    if (e.target.className === 'add-task-button') {
-        // Find which task column the button is in
-        const column = e.target.closest('.task-column');
-        let priority = '';
-        if (column.id === 'high-priority') priority = 'high';
-        else if (column.id === 'medium-priority') priority = 'medium';
-        else if (column.id === 'low-priority') priority = 'low';
-        else return;
-
-        // Prompt for task text
-        const taskText = prompt(`Enter a new ${priority} priority task:`);
-        if (!taskText) return;
-
-        // Create new task
-        const li = document.createElement('li');
-        li.textContent = taskText.trim();
-
-        // Add to the correct list
-        const taskList = document.getElementById(`${priority}-tasks`);
-        taskList.appendChild(li);
-
-        // Add a finished button
-        const delBtn = document.createElement('button');
-        delBtn.className = 'finished-task';
-        delBtn.textContent = '✓';
-        li.appendChild(delBtn);
-    }
-
     // Add a delete button next to the tasks which are in the finished column - if you press it, it will delete the task
     if (
         e.target.className === 'delete-task' &&

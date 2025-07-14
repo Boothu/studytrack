@@ -105,6 +105,35 @@ button:hover,
     margin-bottom: 12px;
 }
 
+#add-task-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+#add-task-modal .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 300px;
+    width: 90%;
+    text-align: center;
+}
+
+#add-task-modal input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+}
+
+#add-task-modal button {
+    margin: 5px;
+    padding: 6px 12px;
+}
+
 .task-list {
     list-style: none;
     padding: 0;
