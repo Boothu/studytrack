@@ -264,3 +264,55 @@ function updateProgress() {
     progressText.textContent = `${displayMinutes} / ${dailyGoal} mins`;
     progressBar.style.width = `${percent}%`;
 }
+
+
+
+
+// LOCAL STORAGE MANAGEMENT
+// TASKS
+// GOAL
+function saveGoal() {
+    localStorage.setItem('goal', dailyGoal);
+    localStorage.setItem('minutes', minutesCompleted);
+}
+
+function loadGoal() {
+    dailyGoal = parseInt(localStorage.getItem('goal')) || 0;
+    minutesCompleted = parseFloat(localStorage.getItem('minutes')) || 0;
+    goalInput.value = dailyGoal || '';
+    updateProgress();
+}
+
+// DARK MODE
+function saveDarkMode() {
+    localStorage.setItem('dark', document.body.classList.contains('dark') ? '1' : '');
+}
+
+function loadDarkMode() {
+    if (localStorage.getItem('dark') === '1') {
+        document.body.classList.add('dark');
+    }
+}
+
+// SAVE HOOKS
+// Save goal when setting it
+document.getElementById('set-goal').addEventListener('click', saveGoal);
+
+// Save dark mode when toggling
+document.querySelector('.dark-toggle-button').addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    saveDarkMode();
+});
+
+// Save progress when updating the progress bar
+const oldUpdateProgress = updateProgress;
+updateProgress = function () {
+    oldUpdateProgress();
+    saveGoal();
+}
+
+// Load on page load
+window.addEventListener('DOMContentLoaded', () => {
+    loadGoal();
+    loadDarkMode();
+});
