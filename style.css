@@ -231,6 +231,40 @@ body.dark .task-list li {
     border-color: #5a5e76;
 }
 
+body.dark #add-task-modal .modal-content {
+    background: #2d3142;
+    color: #e3e6ee;
+}
+
+body.dark #add-task-modal input[type="text"] {
+    background: #35394a;
+    color: #e3e6ee;
+    border: 1px solid #4f5368;
+}
+
+body.dark #add-task-modal button {
+    background: #4950a3;
+    color: #fff;
+}
+
+body.dark #add-task-modal button:hover {
+    background: #3b3f7a;
+}
+
+body.dark .delete-task,
+body.dark .finished-task {
+    background: transparent;
+    border: none;
+    font-size: 1.1em;
+    margin-left: 1px;
+    cursor: pointer;
+}
+
+body.dark .delete-task:hover,
+body.dark .finished-task:hover {
+    background: transparent;
+}
+
 body.dark button,
 body.dark #set-goal {
     background: #4950a3;
