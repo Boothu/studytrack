@@ -270,6 +270,54 @@ function updateProgress() {
 
 // LOCAL STORAGE MANAGEMENT
 // TASKS
+function saveTasks() {
+    const types = ['high', 'medium', 'low', 'finished'];
+    types.forEach(type => {
+        const list = document.getElementById(type + '-tasks');
+        const tasks = [];
+        list.querySelectorAll('li').forEach(item => {
+            // Get only the text, ignore buttons
+            const text = item.firstChild.textContent.trim();
+            tasks.push(text);
+        });
+        // Save the array of task texts to localStorage as JSON string
+        localStorage.setItem(type + 'Tasks', JSON.stringify(tasks));
+    });
+}
+
+// Load all tasks from localStorage
+function loadTasks() {
+    const types = ['high', 'medium', 'low', 'finished'];
+    types.forEach(type => {
+        const list = document.getElementById(type + '-tasks');
+        list.innerHTML = '';
+
+        // Get the array of task texts from localStorage (or empty array if none)
+        const tasks = JSON.parse(localStorage.getItem(type + 'Tasks') || '[]');
+
+        // For each saved task text, create new <li> and button
+        tasks.forEach(text => {
+            const li = document.createElement('li');
+            li.textContent = text;
+
+            // Delete button for finished tasks, or finished button for others
+            const btn = document.createElement('button');
+            if (type === 'finished') {
+                btn.textContent = '✕';
+                btn.className = 'delete-task';
+            } else {
+                btn.textContent = '✓';
+                btn.className = 'finished-task';
+            }
+
+            // Add button to <li>
+            li.appendChild(btn);
+            // Add <li> to list
+            list.appendChild(li);
+        });
+    });
+}
+
 // GOAL
 function saveGoal() {
     localStorage.setItem('goal', dailyGoal);
@@ -277,6 +325,7 @@ function saveGoal() {
 }
 
 function loadGoal() {
+    // Load daily goal and completed minutes from localStorage, or set to 0 if not found
     dailyGoal = parseInt(localStorage.getItem('goal')) || 0;
     minutesCompleted = parseFloat(localStorage.getItem('minutes')) || 0;
     goalInput.value = dailyGoal || '';
@@ -285,16 +334,22 @@ function loadGoal() {
 
 // DARK MODE
 function saveDarkMode() {
+    // If the body has the 'dark' class, save '1', otherwise save an empty string
     localStorage.setItem('dark', document.body.classList.contains('dark') ? '1' : '');
 }
 
 function loadDarkMode() {
+    // If 'dark' in localStorage is '1', apply dark mode
     if (localStorage.getItem('dark') === '1') {
         document.body.classList.add('dark');
     }
 }
 
 // SAVE HOOKS
+// Save tasks on any task list button click or when adding a task
+document.querySelector('.task-lists').addEventListener('click', () => saveTasks());
+document.getElementById('add-task-confirm').addEventListener('click', () => saveTasks());
+
 // Save goal when setting it
 document.getElementById('set-goal').addEventListener('click', saveGoal);
 
@@ -313,6 +368,7 @@ updateProgress = function () {
 
 // Load on page load
 window.addEventListener('DOMContentLoaded', () => {
+    loadTasks();
     loadGoal();
     loadDarkMode();
 });
