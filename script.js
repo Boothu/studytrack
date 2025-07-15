@@ -77,7 +77,8 @@ document.getElementById('start-button').addEventListener('click', function () {
             if (isFocusSession) {
                 const elapsedSeconds = startTime - timeLeft;
                 const elapsedMinutes = elapsedSeconds / 60;
-                minutesCompleted = Math.min(elapsedMinutes, dailyGoal);
+                // Add previously completed minutes to the current session's elapsed minutes
+                minutesCompleted = Math.min((parseFloat(localStorage.getItem('minutes')) || 0) + elapsedMinutes, dailyGoal);
                 updateProgress();
             }
         }
@@ -244,7 +245,7 @@ const progressBar = document.getElementById("progress-bar");
 
 // If 'set goal' button is clicked, set the daily goal and reset progress
 document.getElementById('set-goal').addEventListener('click', function () {
-    if (goalInput.value > 0) {
+    if (goalInput.value > -1) {
         dailyGoal = parseInt(goalInput.value);
         minutesCompleted = 0;
         updateProgress();
