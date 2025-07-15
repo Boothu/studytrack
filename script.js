@@ -60,6 +60,9 @@ function updateTimerDisplay() {
     document.getElementById('timer-display').textContent = minutes + ":" + seconds;
 }
 
+// Keep track of completed minutes for the progress bar at the start of session - prevents exponential growth of completed minutes
+let startMinutesCompleted = 0;
+
 // If 'start' button is clicked
 document.getElementById('start-button').addEventListener('click', function () {
     // If there is already a timer running, do nothing
@@ -67,6 +70,9 @@ document.getElementById('start-button').addEventListener('click', function () {
     // Calculate the session duration (25 minutes for focus or 5/25 minutes for breaks) and store the current timeLeft
     const sessionDuration = isFocusSession ? 25 * 60 : (pomodoroCount % 4 === 0 ? 25 * 60 : 5 * 60);
     const startTime = timeLeft;
+
+    startMinutesCompleted = parseFloat(localStorage.getItem('minutes')) || 0;
+
     // Start interval which runs every second
     timerInterval = setInterval(function () {
         // Decrease time as long as there is time left
@@ -78,7 +84,7 @@ document.getElementById('start-button').addEventListener('click', function () {
                 const elapsedSeconds = startTime - timeLeft;
                 const elapsedMinutes = elapsedSeconds / 60;
                 // Add previously completed minutes to the current session's elapsed minutes
-                minutesCompleted = Math.min((parseFloat(localStorage.getItem('minutes')) || 0) + elapsedMinutes, dailyGoal);
+                minutesCompleted = Math.min(startMinutesCompleted + elapsedMinutes, dailyGoal);
                 updateProgress();
             }
         }
@@ -103,7 +109,7 @@ document.getElementById('start-button').addEventListener('click', function () {
                 alert("Back to work!");
             }
             updateTimerDisplay();
-            savePomodoro(); 
+            savePomodoro();
         }
     }, 1000); // 1000 ms = 1 second
 });
