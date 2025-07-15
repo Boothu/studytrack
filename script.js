@@ -103,6 +103,7 @@ document.getElementById('start-button').addEventListener('click', function () {
                 alert("Back to work!");
             }
             updateTimerDisplay();
+            savePomodoro(); 
         }
     }, 1000); // 1000 ms = 1 second
 });
@@ -112,6 +113,7 @@ document.getElementById('pause-button').addEventListener('click', function () {
     if (timerInterval) {
         clearInterval(timerInterval);
         timerInterval = null;
+        savePomodoro();
     }
 });
 
@@ -123,6 +125,7 @@ document.getElementById('reset-button').addEventListener('click', function () {
     pomodoroCount = 0;
     timeLeft = 25 * 60;
     updateTimerDisplay();
+    savePomodoro();
 });
 
 // If 'skip5' button is clicked
@@ -132,6 +135,7 @@ document.getElementById('skip5-button').addEventListener('click', function () {
     isFocusSession = false;
     timeLeft = 5 * 60;
     updateTimerDisplay();
+    savePomodoro();
 });
 
 // If 'skip25' button is clicked
@@ -141,6 +145,7 @@ document.getElementById('skip25-button').addEventListener('click', function () {
     isFocusSession = false;
     timeLeft = 25 * 60;
     updateTimerDisplay();
+    savePomodoro();
 });
 
 
@@ -270,6 +275,21 @@ function updateProgress() {
 
 
 // LOCAL STORAGE MANAGEMENT
+
+// POMODORO TIMER
+function savePomodoro() {
+    localStorage.setItem('pomodoroTime', timeLeft);
+    // Store whether it's a focus session or break session as '1' or '0'
+    localStorage.setItem('pomodoroFocus', isFocusSession ? '1' : '0');
+    localStorage.setItem('pomodoroCount', pomodoroCount);
+}
+function loadPomodoro() {
+    if (localStorage.getItem('pomodoroTime')) timeLeft = parseInt(localStorage.getItem('pomodoroTime'));
+    if (localStorage.getItem('pomodoroFocus')) isFocusSession = localStorage.getItem('pomodoroFocus') === '1';
+    if (localStorage.getItem('pomodoroCount')) pomodoroCount = parseInt(localStorage.getItem('pomodoroCount'));
+    updateTimerDisplay();
+}
+
 // TASKS
 function saveTasks() {
     const types = ['high', 'medium', 'low', 'finished'];
@@ -369,6 +389,7 @@ updateProgress = function () {
 
 // Load on page load
 window.addEventListener('DOMContentLoaded', () => {
+    loadPomodoro();
     loadTasks();
     loadGoal();
     loadDarkMode();
