@@ -13,12 +13,10 @@ StudyTrack is a productivity web app designed to help students manage their time
 
 # Built with
 
-HTML, CSS, JavaScript
+- HTML
+- CSS
+- JavaScript
 
 # Site Link
 
 [https://boothu.github.io/](https://boothu.github.io/StudyTrack/)
-
-# Note
-
-This is currently a work in progress.
