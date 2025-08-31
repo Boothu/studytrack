@@ -19,7 +19,7 @@ StudyTrack is a productivity web app designed to help students manage their time
 
 ## Site Link
 
-[boothu.github.io/StudyTrack](https://boothu.github.io/StudyTrack/)
+[boothu.github.io/studytrack](https://boothu.github.io/studytrack/)
 
 ## Preview
 <img src="https://raw.githubusercontent.com/Boothu/boothu.github.io/main/images/ST%20PREVIEW%20DARK.png" alt="Preview" width="900">
