@@ -2,7 +2,7 @@
 
 StudyTrack is a productivity web app designed to help students manage their time, tasks, and study goals.
 
-# Features
+## Features
 
 - Pomodoro timer
 - To-do list 
@@ -11,12 +11,15 @@ StudyTrack is a productivity web app designed to help students manage their time
 - No-distractions mode (timer only)
 - Daily goals + goal progress bar
 
-# Built with
+## Built with
 
 - HTML
 - CSS
 - JavaScript
 
-# Site Link
+## Site Link
 
-[https://boothu.github.io/](https://boothu.github.io/StudyTrack/)
+[boothu.github.io/StudyTrack](https://boothu.github.io/StudyTrack/)
+
+## Preview
+<img src="https://raw.githubusercontent.com/Boothu/boothu.github.io/main/images/ST%20PREVIEW%20DARK.png" alt="Preview" width="900">
